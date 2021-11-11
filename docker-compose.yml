@@ -5,14 +5,10 @@ services:
     # image: mcr.microsoft.com/azure-sql-edge
     environment:
       ACCEPT_EULA: "Y"
-      SA_PASSWORD: "aBc123!@#"
+      SA_PASSWORD: "abc123!@#"
       DB_NAME: "movies"
     ports:
       - target: 1433
         published: 1434
         protocol: tcp
         mode: host
-    volumes:
-      - ./mssql-setup/:/mssql-setup/
-    command:
-      - ./mssql-setup/bootstrap.sh
