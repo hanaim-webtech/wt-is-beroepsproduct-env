@@ -6,18 +6,13 @@ services:
     environment:
       ACCEPT_EULA: "Y"
       SA_PASSWORD: "aBc123!@#"
+      DB_NAME: "movies"
     ports:
       - target: 1433
         published: 1434
         protocol: tcp
         mode: host
     volumes:
-      - ./db/:/db/
+      - ./mssql-setup/:/mssql-setup/
     command:
-      - /bin/bash
-      - -c
-      - |
-        /opt/mssql/bin/sqlservr & 
-        sleep 10
-        /opt/mssql-tools/bin/sqlcmd -U sa -P $$SA_PASSWORD -l 30 -e -i /db/setup.sql
-        sleep infinity
+      - ./mssql-setup/bootstrap.sh

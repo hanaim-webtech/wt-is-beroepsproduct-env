@@ -1,6 +1,3 @@
-IF EXISTS (SELECT name FROM master.sys.databases WHERE name = N'Movies')
-	set noexec on
-
 -- Schema and data for Movies database.
 use master;
 DROP DATABASE IF EXISTS Movies;
