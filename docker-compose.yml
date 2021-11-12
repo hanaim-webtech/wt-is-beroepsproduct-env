@@ -13,7 +13,6 @@ services:
         protocol: tcp
         mode: host
   web_server:
-    # image: debian:10-slim
     build: ./webserver
     depends_on:
       - database_server
