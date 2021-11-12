@@ -2,8 +2,6 @@
 set -x
 # https://stackoverflow.com/questions/58279183/how-do-i-check-that-a-sql-server-linux-database-is-up-and-running
 
-/opt/mssql/bin/sqlservr &
-
 sleep 20
 
 for i in {1..20}; do

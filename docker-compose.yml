@@ -1,6 +1,6 @@
-version: "0.1"
+version: "3.8"
 services:
-  ms-rdbms:
+  database_server:
     image: mcr.microsoft.com/mssql/server
     # image: mcr.microsoft.com/azure-sql-edge
     environment:
@@ -12,3 +12,17 @@ services:
         published: 1434
         protocol: tcp
         mode: host
+  web_server:
+    # image: debian:10-slim
+    build: ./webserver
+    depends_on:
+      - database_server
+    ports:
+      - target: 80
+        published: 8080
+        protocol: tcp
+        mode: host
+    volumes:
+      - ./applicatie/:/applicatie/
+      - ./mssql-setup:/mssql-setup/
+    command: php -S 0.0.0.0:80 -t /applicatie/

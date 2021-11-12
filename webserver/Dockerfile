@@ -1,0 +1,3 @@
+FROM php:7.4.6-cli-alpine3.11
+COPY ./provision.sh /root/provision.sh
+RUN /root/provision.sh
