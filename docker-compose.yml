@@ -2,12 +2,8 @@ version: "3.8"
 services:
   database_server:
     image: mcr.microsoft.com/mssql/server
-    # image: mcr.microsoft.com/azure-sql-edge
-    environment:
-      ACCEPT_EULA: "Y"
-      SA_PASSWORD: "abc123!@#"
-      DB_NAME: "movies"
-      DB_HOST: "host.docker.internal,1434"
+    env_file:
+      - variables.env
     ports:
       - target: 1433
         published: 1434
@@ -15,11 +11,8 @@ services:
         mode: host
   web_server:
     build: ./webserver
-    environment:
-      ACCEPT_EULA: "Y"
-      SA_PASSWORD: "abc123!@#"
-      DB_NAME: "movies"
-      DB_HOST: "host.docker.internal,1434"
+    env_file:
+      - variables.env
     depends_on:
       - database_server
     ports:
@@ -29,5 +22,3 @@ services:
         mode: host
     volumes:
       - ./applicatie/:/applicatie/
-      - ./mssql-setup:/mssql-setup/
-    entrypoint: sh /mssql-setup/bootstrap.sh

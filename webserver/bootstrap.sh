@@ -18,7 +18,7 @@ while [ $i -le 20 ]; do
         echo ""
         echo "---------------------------------------------"
         echo "-                                           -"
-        echo "- $I: Database exists, webserver starting!  -"
+        echo "- $i: Database exists, webserver starting!  -"
         echo "-                                           -"
         echo "---------------------------------------------"
         php -S 0.0.0.0:80 -t /applicatie/
@@ -28,13 +28,13 @@ while [ $i -le 20 ]; do
     echo ""
         echo "-------------------------------------------------------"
         echo "-                                                     -"
-        echo "- $I: Server available, creating database '$DB_NAME'  -"
+        echo "- $i: Server available, creating database '$DB_NAME'  -"
         echo "-                                                     -"
         echo "-------------------------------------------------------"
-        /opt/mssql-tools/bin/sqlcmd -S "$DB_HOST" -U sa -P "$SA_PASSWORD" -i /mssql-setup/movies.sql
+        /opt/mssql-tools/bin/sqlcmd -S "$DB_HOST" -U sa -P "$SA_PASSWORD" -i /setup/movies.sql
         echo "-------------------------------------------------------"
         echo "-                                                     -"
-        echo "- $I: Database created '$DB_NAME'                     -"
+        echo "- $i: Database created '$DB_NAME'                     -"
         echo "-                                                     -"
         echo "-------------------------------------------------------"
         # no break, let run the loop again, line 13 should return 'YES'
@@ -49,6 +49,6 @@ done
 
 echo "-------------------------------------------------------------------------"
 echo "-                                                                       -"
-echo "- $I: webserver stopped or something went wrong connecting to database  -"
+echo "- $i: webserver stopped or something went wrong connecting to database  -"
 echo "-                                                                       -"
 echo "-------------------------------------------------------------------------"
