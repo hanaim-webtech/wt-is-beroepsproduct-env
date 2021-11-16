@@ -7,6 +7,7 @@ services:
       ACCEPT_EULA: "Y"
       SA_PASSWORD: "abc123!@#"
       DB_NAME: "movies"
+      DB_HOST: "host.docker.internal,1434"
     ports:
       - target: 1433
         published: 1434
@@ -14,6 +15,11 @@ services:
         mode: host
   web_server:
     build: ./webserver
+    environment:
+      ACCEPT_EULA: "Y"
+      SA_PASSWORD: "abc123!@#"
+      DB_NAME: "movies"
+      DB_HOST: "host.docker.internal,1434"
     depends_on:
       - database_server
     ports:
@@ -24,4 +30,4 @@ services:
     volumes:
       - ./applicatie/:/applicatie/
       - ./mssql-setup:/mssql-setup/
-    command: php -S 0.0.0.0:80 -t /applicatie/
+    entrypoint: sh /mssql-setup/bootstrap.sh
