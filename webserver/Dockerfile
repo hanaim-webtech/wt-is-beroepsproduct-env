@@ -1,4 +1,4 @@
-FROM php:7.4.6-cli-alpine3.11
+FROM php:8.0-cli-alpine3.14
 
 # install additional software and drivers
 COPY ./init-container.sh /setup/
