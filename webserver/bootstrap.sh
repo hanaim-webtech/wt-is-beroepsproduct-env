@@ -41,8 +41,12 @@ while [ $i -le 20 ]; do
 
     # If the code is different than 0, an error occured. (most likely database wasn't online) Retry.
     else
-        echo "$i: Database not ready yet..."
-        sleep 1
+        echo "-------------------------------------------------------"
+        echo "-                                                     -"
+        echo "- $i: Database not ready yet...                       -"
+        echo "-                                                     -"
+        echo "-------------------------------------------------------"
+        sleep 5
     fi
     i=$(( i + 1 ))
 done
