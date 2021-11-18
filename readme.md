@@ -5,6 +5,14 @@ op [Docker](https://www.docker.com/). Bij het opstarten van de omgeving
 wordt automatisch de database *Fletnix* aangemaakt en gevuld met
 voorbeelddata.
 
+***Let op, deze omgeving is specifiek bedoeld als educatieve omgeving.
+Deze omgeving kan niet gebruikt worden voor productie-omgevingen,
+hiervoor zullen eerst nog een groot aantal beveilingsaspecten opgelost
+moeten worden (wachtwoorden zijn eenvoudig te achterhalen, er wordt
+gebruik gemaakt van de [Built-in web
+server](https://www.php.net/manual/en/features.commandline.webserver.php),
+etc. etc.).***
+
 ## Benodigde software
 
 De volgende software heb je nodig:
@@ -97,6 +105,10 @@ met een database en gegevens in een webpagina plaats.
 
 ## Problemen oplossen
 
+### Database
+
+Verbinding
+
 ### Unable to connect
 
 Als je een melding krijgt dat de pagina niet bereikbaar is
@@ -116,4 +128,3 @@ Als je een melding krijgt dat de pagina niet bereikbaar is
 Als je de melding *error during connect: This error may indicate that
 the docker daemon is not running.* dan heb je docker niet opgestart.
 Start Docker op of reboot je machine.
-
