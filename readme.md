@@ -94,3 +94,26 @@ Zie de lesstof hoe je dat allemaal doet.
 Tip: in het bestand `moviegenres.php` (in combinatie met
 `db_connectie.php`) kun je een voorbeeld zien hoe je verbinding maakt
 met een database en gegevens in een webpagina plaats.
+
+## Problemen oplossen
+
+### Unable to connect
+
+Als je een melding krijgt dat de pagina niet bereikbaar is
+
+1.  Controleer in de URL of je http://localhost:8080 correct gespeld
+    hebt.
+2.  Controleer of je in de URL het bestandsnaam (met *.php*) correct
+    gespeld hebt.
+3.  Controleer of Docker opgestart is.
+4.  Controleer of de servers opgestart zijn (type in de VS-code terminal
+    `docker compose ls -a` daar moet je docker-omgeving staan met als
+    status *running(2)*).
+5.  Reboot je machine.
+
+### This error may indicate that the docker daemon is not running.
+
+Als je de melding *error during connect: This error may indicate that
+the docker daemon is not running.* dan heb je docker niet opgestart.
+Start Docker op of reboot je machine.
+
