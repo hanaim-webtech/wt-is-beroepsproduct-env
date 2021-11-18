@@ -40,5 +40,6 @@ Met GitHub Desktop: klik op 'Open with Visual Studio Code'.
 
 Onderin Visual Studio Code zou een *terminal* open moeten staan. Als dit
 niet het geval is, kies in het menu van Visual Studio Code onder
-*Terminal* de optie *New terminal*. ![Terminal Visual Studio
-Code](readme-images/vscode-terminal.png).
+*Terminal* de optie *New terminal*.
+
+![Terminal Visual Studio Code](readme-images/vscode-terminal.png).
