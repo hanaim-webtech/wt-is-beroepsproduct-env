@@ -2,6 +2,7 @@ version: "3.8"
 services:
   database_server:
     image: mcr.microsoft.com/mssql/server
+    restart: always
     env_file:
       - variables.env
     ports:
@@ -12,6 +13,7 @@ services:
   web_server:
     build:
       dockerfile: Dockerfile-webserver
+    restart: always
     env_file:
       - variables.env
     depends_on:
