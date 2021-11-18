@@ -43,3 +43,19 @@ niet het geval is, kies in het menu van Visual Studio Code onder
 *Terminal* de optie *New terminal*.
 
 ![Terminal Visual Studio Code](readme-images/vscode-terminal.png).
+
+Type in de terminal `docker compose up` en daarna *enter*.
+
+Nu worden  een database server en een web server aangemaakt. Daarna worden beide servers opgestart en de *Fletnix* database wordt automatisch
+aangemaakt en gevuld. Tijdens dit proces zie je een behoorlijk aantal meldingen voorbij komen.
+
+Uiteindelijk moet de volgende melding in beeld verschijnen **Database exists, webserver starting!**. Zoiets als
+
+![Servers aangemaakt](readme-images/vscode-servers-created.png)
+
+Test de webserver:
+
+- *It works!": <http://localhost:8080> of <http://localhost:8080/index.php>
+- *phpinfo*: <http://localhost:8080/phpinfo.php>
+- *Data uit de database*: <http://localhost:8080/moviegenres.php>
+
