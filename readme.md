@@ -46,16 +46,51 @@ niet het geval is, kies in het menu van Visual Studio Code onder
 
 Type in de terminal `docker compose up` en daarna *enter*.
 
-Nu worden  een database server en een web server aangemaakt. Daarna worden beide servers opgestart en de *Fletnix* database wordt automatisch
-aangemaakt en gevuld. Tijdens dit proces zie je een behoorlijk aantal meldingen voorbij komen.
+Nu worden een database server en een web server aangemaakt. Daarna
+worden beide servers opgestart en de *Fletnix* database wordt
+automatisch aangemaakt en gevuld. Tijdens dit proces zie je een
+behoorlijk aantal meldingen voorbij komen.
 
-Uiteindelijk moet de volgende melding in beeld verschijnen **Database exists, webserver starting!**. Zoiets als
+Uiteindelijk moet de volgende melding in beeld verschijnen **Database
+exists, webserver starting!**. Zoiets als
 
 ![Servers aangemaakt](readme-images/vscode-servers-created.png)
 
 Test de webserver:
 
-- *It works!": <http://localhost:8080> of <http://localhost:8080/index.php>
-- *phpinfo*: <http://localhost:8080/phpinfo.php>
-- *Data uit de database*: <http://localhost:8080/moviegenres.php>
+-   *It works!*: <http://localhost:8080> of
+    <http://localhost:8080/index.php>
+-   *phpinfo*: <http://localhost:8080/phpinfo.php>
+-   *Data uit de database*: <http://localhost:8080/moviegenres.php>
 
+## Je eigen bestanden
+
+De bestanden die de webserver gebruikt staan in de map `./applicatie/`,
+hier moet je je beroepsproduct in uitwerken.
+
+### Eerste php-bestand
+
+Maak een nieuw bestand aan in de map `./applicatie/` en noem deze
+`test.php`. Open dit bestand met Visual Studio Code en voeg de volgende
+code toe:
+
+``` .php
+<?php
+echo ('Hallo **je eigen naam**');
+?>
+```
+
+Roep de `test.php` in je webbrowser (op de localhost:8080). Als het goed
+is zie je de melding *Hallo, \*\*je eigen naam\*\** verschijnen.
+
+### Fletnix applicatie
+
+Kopieer al je HTML-bestanden naar de map `./applicatie/` en verander van
+elke bestand de extensie naar `.php`. Roep als test alle bestanden aan
+via je browser. Maak nu je web-applicatie zodanig dat deze optimaal van
+opzet is en dat de gegevens in de site uit de database gehaald worden.
+Zie de lesstof hoe je dat allemaal doet.
+
+Tip: in het bestand `moviegenres.php` (in combinatie met
+`db_connectie.php`) kun je een voorbeeld zien hoe je verbinding maakt
+met een database en gegevens in een webpagina plaats.
