@@ -10,7 +10,8 @@ services:
         protocol: tcp
         mode: host
   web_server:
-    build: ./webserver
+    build:
+      dockerfile: Dockerfile-webserver
     env_file:
       - variables.env
     depends_on:
@@ -22,3 +23,5 @@ services:
         mode: host
     volumes:
       - ./applicatie/:/applicatie/
+      - ./webserver-setup/:/setup/
+    entrypoint: [ "sh", "/setup/bootstrap.sh" ]

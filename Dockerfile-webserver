@@ -33,9 +33,3 @@ RUN pecl config-set php_ini /usr/local/etc/php/php.ini
 
 RUN pecl install pdo_sqlsrv
 RUN docker-php-ext-enable pdo_sqlsrv
-
-# Setting up DB environment
-COPY ./movies.sql /setup/
-COPY ./bootstrap.sh /setup/
-
-ENTRYPOINT [ "sh", "/setup/bootstrap.sh" ]
