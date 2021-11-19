@@ -32,6 +32,7 @@ $genre_table = $genre_table . "</table>";
   <title>Movie genres</title>
 </head>
 <body>
+  <h1>Aantal films per genre</h1>
   <?php 
   echo ($genre_table);
   ?>
