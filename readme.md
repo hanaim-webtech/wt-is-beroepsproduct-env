@@ -128,5 +128,3 @@ Als je een melding krijgt dat de pagina niet bereikbaar is
 Als je de melding *error during connect: This error may indicate that
 the docker daemon is not running.* dan heb je docker niet opgestart.
 Start Docker op of reboot je machine.
-
-
