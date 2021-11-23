@@ -62,7 +62,8 @@ behoorlijk aantal meldingen voorbij komen.
 *Soms krijg je bij stap 18/19 een foutmelding **ERROR \[18/19\] RUN pecl
 install pdo_sqlsrv**. De installatie haalt bestanden van het internet
 af, de server die bij deze stap hoort wil nog wel een offline zijn.
-Wacht een paar minuten en probeer nog eens.*
+Wacht een paar minuten en probeer nog eens. Soms is het nodig om ook de
+cache leeg te gooien met `docker system prune -f`*
 
 Uiteindelijk moet de volgende melding in beeld verschijnen **Database
 exists, webserver starting!**. Zoiets als
