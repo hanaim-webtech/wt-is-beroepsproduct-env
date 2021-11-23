@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 # set -x
 
 # based on: 
@@ -6,53 +6,61 @@
 
 sleep 10 # wait for sql server to start up
 
-# 20 retries....
-i=0
-while [ $i -le 20 ]; do
-    echo "$i: test db"
-    # Check if Database already exists
-    RESULT=$(/opt/mssql-tools/bin/sqlcmd -S "$DB_HOST" -U sa -P "$SA_PASSWORD" -Q "IF DB_ID('$DB_NAME') IS NOT NULL print 'YES'")
-    CODE=$?
-
-    if [ "$RESULT" = "YES" ]; then
+for sqlfile in "$(dirname $0)"/*.sql
+do
+    dbname=$(basename "$sqlfile" .sql)
+    # 20 retries....
+    i=0
+    while [ $i -le 20 ]; do
         echo ""
         echo "---------------------------------------------"
-        echo "-                                           -"
-        echo "- $i: Database exists, webserver starting!  -"
-        echo "-                                           -"
+        echo "- $i: checking for database '$dbname'       -"
         echo "---------------------------------------------"
-        php -S 0.0.0.0:80 -t /applicatie/
-        break # exit for loop
 
-    elif [ $CODE -eq 0 ] && [ "$RESULT" = "" ]; then
-    echo ""
-        echo "-------------------------------------------------------"
-        echo "-                                                     -"
-        echo "- $i: Server available, creating database '$DB_NAME'  -"
-        echo "-                                                     -"
-        echo "-------------------------------------------------------"
-        /opt/mssql-tools/bin/sqlcmd -S "$DB_HOST" -U sa -P "$SA_PASSWORD" -i /setup/movies.sql
-        echo "-------------------------------------------------------"
-        echo "-                                                     -"
-        echo "- $i: Database created '$DB_NAME'                     -"
-        echo "-                                                     -"
-        echo "-------------------------------------------------------"
-        # no break, let run the loop again, line 13 should return 'YES'
+        # Check if Database already exists
+        RESULT=$(/opt/mssql-tools/bin/sqlcmd -S "$DB_HOST" -U sa -P "$SA_PASSWORD" -Q "IF DB_ID('$dbname') IS NOT NULL print 'YES'")
+        CODE=$?
 
-    # If the code is different than 0, an error occured. (most likely database wasn't online) Retry.
-    else
-        echo "-------------------------------------------------------"
-        echo "-                                                     -"
-        echo "- $i: Database not ready yet...                       -"
-        echo "-                                                     -"
-        echo "-------------------------------------------------------"
-        sleep 5
-    fi
-    i=$(( i + 1 ))
+        if [ "$RESULT" = "YES" ]; then
+            echo ""
+            echo "-----------------------------------------------"
+            echo "- $i: Database '$dbname' exists               -"
+            echo "-----------------------------------------------"
+            # php -S 0.0.0.0:80 -t /applicatie/
+            break # exit for loop
+
+        elif [ $CODE -eq 0 ] && [ "$RESULT" = "" ]; then
+            echo ""
+            echo "-------------------------------------------------------"
+            echo "- $i: Server available, creating database '$dbname'  -"
+            echo "-------------------------------------------------------"
+            /opt/mssql-tools/bin/sqlcmd -S "$DB_HOST" -U sa -P "$SA_PASSWORD" -d "master" -Q "create database $dbname"
+            /opt/mssql-tools/bin/sqlcmd -S "$DB_HOST" -U sa -P "$SA_PASSWORD" -d "$dbname" -i "$(dirname $0)"/"$dbname".sql
+            echo "-------------------------------------------------------"
+            echo "- $i: Database created '$dbname'                     -"
+            echo "-------------------------------------------------------"
+            # no break, let run the loop again, line 13 should return 'YES'
+
+        # If the code is different than 0, an error occured. (most likely database wasn't online) Retry.
+        else
+            echo "-------------------------------------------------------"
+            echo "- $i: Database not ready yet...                       -"
+            echo "-------------------------------------------------------"
+            sleep 5
+        fi
+        i=$(( i + 1 ))
+    done
 done
 
-echo "-------------------------------------------------------------------------"
-echo "-                                                                       -"
-echo "- $i: webserver stopped or something went wrong connecting to database  -"
-echo "-                                                                       -"
-echo "-------------------------------------------------------------------------"
+echo ''
+echo '-------------------------------------------------------'
+echo ' Available databases:                                 -'
+
+/opt/mssql-tools/bin/sqlcmd -S "$DB_HOST" -U sa -P "$SA_PASSWORD" -d "master" -Q "set nocount on; select '- ' + name from sys.databases where name not in ('master', 'tempdb', 'model', 'msdb')" -h-1
+
+echo
+echo ' webserver starting'
+echo '-------------------------------------------------------'
+
+php -S 0.0.0.0:80 -t /applicatie/
+
