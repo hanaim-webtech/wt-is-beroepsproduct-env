@@ -1,9 +1,3 @@
-use master;
-DROP DATABASE IF EXISTS Movies;
-CREATE DATABASE Movies;
-GO
-USE Movies
-GO
 CREATE LOGIN applicatie WITH PASSWORD = 'testpassword!Hallo-1244!';
 CREATE USER applicatie;
 ALTER ROLE db_datareader ADD MEMBER applicatie;
