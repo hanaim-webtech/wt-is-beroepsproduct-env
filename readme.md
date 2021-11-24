@@ -128,3 +128,46 @@ Als je een melding krijgt dat de pagina niet bereikbaar is
 Als je de melding *error during connect: This error may indicate that
 the docker daemon is not running.* dan heb je docker niet opgestart.
 Start Docker op of reboot je machine.
+
+### Problemen oplossen onder Windows
+
+#### Te oude computer
+
+Heb je een te oude computer, dan kan je dit dialoogvenster krijgen:
+
+![Docker Desktop - An error occurred - Hardware assisted virtualization
+...](readme-images/Docker_An_error_occurred_Hardware_assisted_virtualization.png)
+
+#### WSL 2
+
+Zodra je Docker geïnstalleerd hebt kan je nog enkele waarschuwingen
+krijgen over WSL 2 ([*Windows Subsystem for Linux
+2*](https://docs.microsoft.com/en-us/windows/wsl/about)). WSL 2 is een
+extra onderdeel voor Windows waarmee Docker, Linux en andere
+technologieën efficiënt kunnen werken binnen Windows.
+
+Als je een bericht krijgt dat WSL 2 niet geïnstalleerd is, volg dan de
+instructies op om WSL 2 wèl te installeren.
+
+Daarna kan je onder andere nog de volgende melding krijgen:
+
+> Please click the link and follow the instructions to install the
+> kernel update: ...
+
+Installeer de kernel update zoals gevraagd.
+
+Herstart je computer.
+
+![Docker Desktop - Install WSL 2 kernel
+update](readme-images/Waarschuwing_WSL_2.png)
+
+*Fig. 2: Docker Desktop - Install WSL 2 kernel update.*
+
+#### Detailinstructies over virtualisatie
+
+Mocht je nog steeds problemen hebben tijdens of direct na de installatie
+van Docker Desktop, bestudeer dan de instructies van Docker Inc. onder
+het kopje
+[*Virtualization*](https://docs.docker.com/docker-for-windows/troubleshoot/#virtualization-must-be-enabled),
+alleen die onder de subkopjes *'VIRTUALIZATION MUST BE ENABLED'* en
+*'WSL 2 AND WINDOWS HOME'*.
