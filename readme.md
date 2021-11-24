@@ -59,8 +59,18 @@ worden beide servers opgestart en de *Fletnix* database wordt
 automatisch aangemaakt en gevuld. Tijdens dit proces zie je een
 behoorlijk aantal meldingen voorbij komen.
 
-Uiteindelijk moet de volgende melding in beeld verschijnen **Database
-exists, webserver starting!**. Zoiets als
+Uiteindelijk moet de volgende melding in beeld verschijnen
+
+    -------------------------------------------------------
+     Available databases:                                 -
+    - movies
+    - muziekschool
+
+     webserver starting
+    -------------------------------------------------------
+    [Wed Nov 24 09:00:02 2021] PHP 7.4.26 Development Server (http://0.0.0.0:80) started
+
+Zoiets als:
 
 ![Servers aangemaakt](readme-images/vscode-servers-created.png)
 
@@ -160,8 +170,6 @@ Herstart je computer.
 
 ![Docker Desktop - Install WSL 2 kernel
 update](readme-images/Waarschuwing_WSL_2.png)
-
-*Fig. 2: Docker Desktop - Install WSL 2 kernel update.*
 
 #### Detailinstructies over virtualisatie
 
