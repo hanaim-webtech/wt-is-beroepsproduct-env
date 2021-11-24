@@ -76,10 +76,7 @@ Uiteindelijk moet de volgende melding in beeld verschijnen
     -------------------------------------------------------
     [Wed Nov 24 09:00:02 2021] PHP 7.4.26 Development Server (http://0.0.0.0:80) started
 
-Zoiets als:
-
-Uiteindelijk moet de volgende melding in beeld verschijnen **Database
-exists, webserver starting!**. Zoiets als
+Zoiets als
 
 ![Servers aangemaakt](readme-images/vscode-servers-created.png)
 
