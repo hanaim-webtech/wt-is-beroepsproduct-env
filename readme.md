@@ -120,13 +120,19 @@ Zie de lesstof hoe je dat allemaal doet.
 
 Tip: in het bestand `moviegenres.php` (in combinatie met
 `db_connectie.php`) kun je een voorbeeld zien hoe je verbinding maakt
-met een database en gegevens in een webpagina plaats.
+met een database en gegevens in een webpagina plaatst.
 
 ## Problemen oplossen
 
-### Database
+### Database bekijken
 
-Verbinding
+In het bestand *variables.env* staan de connectiegegevens voor de
+database (de user is 'sa').
+
+    DB_HOST="...."
+    SA_PASSWORD="...."
+
+![SQL server login](readme-images/sql-management-studio-login.png)
 
 ### Unable to connect
 
