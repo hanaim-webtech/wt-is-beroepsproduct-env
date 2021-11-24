@@ -62,7 +62,21 @@ behoorlijk aantal meldingen voorbij komen.
 *Soms krijg je bij stap 18/19 een foutmelding **ERROR \[18/19\] RUN pecl
 install pdo_sqlsrv**. De installatie haalt bestanden van het internet
 af, de server die bij deze stap hoort wil nog wel een offline zijn.
-Wacht een paar minuten en probeer nog eens.*
+Wacht een paar minuten en probeer nog eens. Lukt het na enige keren nog
+niet, maak dan de cache leeg m.b.t. `docker system prune -f`.*
+
+Uiteindelijk moet de volgende melding in beeld verschijnen
+
+    -------------------------------------------------------
+     Available databases:                                 -
+    - movies
+    - muziekschool
+
+     webserver starting
+    -------------------------------------------------------
+    [Wed Nov 24 09:00:02 2021] PHP 7.4.26 Development Server (http://0.0.0.0:80) started
+
+Zoiets als:
 
 Uiteindelijk moet de volgende melding in beeld verschijnen **Database
 exists, webserver starting!**. Zoiets als
@@ -106,13 +120,19 @@ Zie de lesstof hoe je dat allemaal doet.
 
 Tip: in het bestand `moviegenres.php` (in combinatie met
 `db_connectie.php`) kun je een voorbeeld zien hoe je verbinding maakt
-met een database en gegevens in een webpagina plaats.
+met een database en gegevens in een webpagina plaatst.
 
 ## Problemen oplossen
 
-### Database
+### Database bekijken
 
-Verbinding
+In het bestand *variables.env* staan de connectiegegevens voor de
+database (de user is 'sa').
+
+    DB_HOST="...."
+    SA_PASSWORD="...."
+
+![SQL server login](readme-images/sql-management-studio-login.png)
 
 ### Unable to connect
 
@@ -133,3 +153,44 @@ Als je een melding krijgt dat de pagina niet bereikbaar is
 Als je de melding *error during connect: This error may indicate that
 the docker daemon is not running.* dan heb je docker niet opgestart.
 Start Docker op of reboot je machine.
+
+### Problemen oplossen onder Windows
+
+#### Te oude computer
+
+Heb je een te oude computer, dan kan je dit dialoogvenster krijgen:
+
+![Docker Desktop - An error occurred - Hardware assisted virtualization
+...](readme-images/Docker_An_error_occurred_Hardware_assisted_virtualization.png)
+
+#### WSL 2
+
+Zodra je Docker geïnstalleerd hebt kan je nog enkele waarschuwingen
+krijgen over WSL 2 ([*Windows Subsystem for Linux
+2*](https://docs.microsoft.com/en-us/windows/wsl/about)). WSL 2 is een
+extra onderdeel voor Windows waarmee Docker, Linux en andere
+technologieën efficiënt kunnen werken binnen Windows.
+
+Als je een bericht krijgt dat WSL 2 niet geïnstalleerd is, volg dan de
+instructies op om WSL 2 wèl te installeren.
+
+Daarna kan je onder andere nog de volgende melding krijgen:
+
+> Please click the link and follow the instructions to install the
+> kernel update: ...
+
+Installeer de kernel update zoals gevraagd.
+
+Herstart je computer.
+
+![Docker Desktop - Install WSL 2 kernel
+update](readme-images/Waarschuwing_WSL_2.png)
+
+#### Detailinstructies over virtualisatie
+
+Mocht je nog steeds problemen hebben tijdens of direct na de installatie
+van Docker Desktop, bestudeer dan de instructies van Docker Inc. onder
+het kopje
+[*Virtualization*](https://docs.docker.com/docker-for-windows/troubleshoot/#virtualization-must-be-enabled),
+alleen die onder de subkopjes *'VIRTUALIZATION MUST BE ENABLED'* en
+*'WSL 2 AND WINDOWS HOME'*.
