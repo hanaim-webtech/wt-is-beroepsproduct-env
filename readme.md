@@ -11,7 +11,7 @@ hiervoor zullen eerst nog een groot aantal beveilingsaspecten opgelost
 moeten worden (wachtwoorden zijn eenvoudig te achterhalen, er wordt
 gebruik gemaakt van de [Built-in web
 server](https://www.php.net/manual/en/features.commandline.webserver.php),
-etc. etc.).***
+er is altijd een debugger actief etc. etc.).***
 
 ## Benodigde software
 
@@ -191,3 +191,22 @@ het kopje
 [*Virtualization*](https://docs.docker.com/docker-for-windows/troubleshoot/#virtualization-must-be-enabled),
 alleen die onder de subkopjes *'VIRTUALIZATION MUST BE ENABLED'* en
 *'WSL 2 AND WINDOWS HOME'*.
+
+## Debugging (foutopsporing) van je code
+
+Met een [debugger](https://en.wikipedia.org/wiki/Debugging) is het
+mogelijk om stapsgewijs door je code heen te lopen om zo fouten op te
+kunnen sporen. Het is een handig hulpmiddel om te bekijken wat de code
+nu precies doet. Deze omgeving is zo ingericht dat er ee n debugger
+actief is, je hebt alleen een extra extensie nodig. De [PHP
+Debug](https://marketplace.visualstudio.com/items?itemName=felixfbecker.php-debug)
+van Felix Becker dien je te installeren.
+
+### Installatie debugger
+
+Open aan de linkerkant van Visual Studio Code de extensions en zoek op *felixfbecker.php-debug*. Klik op install en wacht tot deze debugger is geïnstalleerd. Bij het opstarten 
+
+![Installatie PHP Debug](readme-images/vscode-extention-php-debug.png)
+
+### How to debug
+
