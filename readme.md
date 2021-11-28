@@ -210,3 +210,8 @@ Open aan de linkerkant van Visual Studio Code de extensions en zoek op *felixfbe
 
 ### How to debug
 
+Hieronder twee filmpjes die aangeven hoe je een PHP-pagina kunt debuggen.
+
+![debugging part 1](readme-images/how-to-debug-part-1.gif)
+
+![debugging part 1](readme-images/how-to-debug-part-2.gif)
