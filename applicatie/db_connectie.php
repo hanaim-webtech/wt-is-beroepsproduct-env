@@ -1,7 +1,7 @@
 <?php
 
 // defined in 'variables.env'
-$db_host = 'host.docker.internal,1434'; // de database server 
+$db_host = 'database_server'; // de database server 
 $db_name = 'movies';                    // naam van database
 
 // defined in sql-script 'movies.sql'
