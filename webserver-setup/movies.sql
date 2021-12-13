@@ -52,7 +52,7 @@ CREATE TABLE [dbo].[Customer](
 	[subscription_start] [date] NOT NULL,
 	[subscription_end] [date] NULL,
 	[user_name] [varchar](30) NOT NULL,
-	[password] [varchar](50) NOT NULL,
+	[password] [varchar](250) NOT NULL,
 	[country_name] [varchar](50) NOT NULL,
 	[gender] [char](1) NULL,
 	[birth_date] [date] NULL,
