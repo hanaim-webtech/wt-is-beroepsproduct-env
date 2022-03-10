@@ -1,0 +1,36 @@
+https://docs.microsoft.com/en-us/sql/connect/php/download-drivers-php-sql-server?view=sql-server-ver15
+https://docs.microsoft.com/en-us/sql/connect/php/installation-tutorial-linux-mac?view=sql-server-ver15
+
+
+Volume for SQL Server (zodat na 'compose down' de db blijft bestaan)
+php8 installeren
+php8 sql drivers 
+
+------------------------
+installeren php8 is eenvoudig, andere image gebruiken
+
+drivers installeren:
+https://docs.microsoft.com/en-us/sql/connect/php/installation-tutorial-linux-mac?view=sql-server-ver15#installing-on-alpine
+https://docs.microsoft.com/en-us/sql/connect/odbc/linux-mac/installing-the-microsoft-odbc-driver-for-sql-server?view=sql-server-ver15#alpine18
+
+apk update
+apk add --no-cache php8 php8-dev php8-pear php8-pdo php8-openssl 
+apk add --no-cache autoconf make g++
+
+# Download the desired package(s)
+curl -O https://download.microsoft.com/download/b/9/f/b9f3cce4-3925-46d4-9f46-da08869c6486/msodbcsql18_18.0.1.1-1_amd64.apk
+curl -O https://download.microsoft.com/download/b/9/f/b9f3cce4-3925-46d4-9f46-da08869c6486/mssql-tools18_18.0.1.1-1_amd64.apk
+
+
+# (Optional) Verify signature, if 'gpg' is missing install it using 'apk add gnupg':
+curl -O https://download.microsoft.com/download/b/9/f/b9f3cce4-3925-46d4-9f46-da08869c6486/msodbcsql18_18.0.1.1-1_amd64.sig
+curl -O https://download.microsoft.com/download/b/9/f/b9f3cce4-3925-46d4-9f46-da08869c6486/mssql-tools18_18.0.1.1-1_amd64.sig
+
+curl https://packages.microsoft.com/keys/microsoft.asc  | gpg --import -
+gpg --verify msodbcsql18_18.0.1.1-1_amd64.sig msodbcsql18_18.0.1.1-1_amd64.apk
+gpg --verify mssql-tools18_18.0.1.1-1_amd64.sig mssql-tools18_18.0.1.1-1_amd64.apk
+
+
+# Install the package(s)
+yes | apk add --allow-untrusted msodbcsql18_18.0.1.1-1_amd64.apk
+yes | apk add --allow-untrusted mssql-tools18_18.0.1.1-1_amd64.apk

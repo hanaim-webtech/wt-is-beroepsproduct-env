@@ -2,7 +2,6 @@ version: "3.8"
 services:
   database_server:
     image: mcr.microsoft.com/mssql/server
-    # restart: always
     env_file:
       - variables.env
     ports:
@@ -10,10 +9,11 @@ services:
         published: 1434
         protocol: tcp
         mode: host
+    volumes:
+      - data-volume:/var/opt/mssql
   web_server:
     build:
       dockerfile: Dockerfile-webserver
-    # restart: always
     env_file:
       - variables.env
     depends_on:
@@ -27,3 +27,5 @@ services:
       - ./applicatie/:/applicatie/
       - ./webserver-setup/:/setup/
     entrypoint: [ "sh", "/setup/bootstrap.sh" ]
+volumes:
+  data-volume:
