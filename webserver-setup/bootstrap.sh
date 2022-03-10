@@ -18,7 +18,7 @@ do
         echo "---------------------------------------------"
 
         # Check if Database already exists
-        RESULT=$(/opt/mssql-tools18/bin/sqlcmd -S "$DB_HOST" -U sa -P "$SA_PASSWORD" -Q "IF DB_ID('$dbname') IS NOT NULL print 'YES'")
+        RESULT=$(/opt/mssql-tools18/bin/sqlcmd -C -S "$DB_HOST" -U sa -P "$SA_PASSWORD" -Q "IF DB_ID('$dbname') IS NOT NULL print 'YES'")
         CODE=$?
 
         if [ "$RESULT" = "YES" ]; then
@@ -34,8 +34,8 @@ do
             echo "-------------------------------------------------------"
             echo "- $i: Server available, creating database '$dbname'  -"
             echo "-------------------------------------------------------"
-            /opt/mssql-tools18/bin/sqlcmd -S "$DB_HOST" -U sa -P "$SA_PASSWORD" -d "master" -Q "create database $dbname"
-            /opt/mssql-tools18/bin/sqlcmd -S "$DB_HOST" -U sa -P "$SA_PASSWORD" -d "$dbname" -i "$(dirname $0)"/"$dbname".sql
+            /opt/mssql-tools18/bin/sqlcmd -C -S "$DB_HOST" -U sa -P "$SA_PASSWORD" -d "master" -Q "create database $dbname"
+            /opt/mssql-tools18/bin/sqlcmd -C -S "$DB_HOST" -U sa -P "$SA_PASSWORD" -d "$dbname" -i "$(dirname $0)"/"$dbname".sql
             echo "-------------------------------------------------------"
             echo "- $i: Database created '$dbname'                     -"
             echo "-------------------------------------------------------"
@@ -56,7 +56,7 @@ echo ''
 echo '-------------------------------------------------------'
 echo ' Available databases:                                 -'
 
-/opt/mssql-tools18/bin/sqlcmd -S "$DB_HOST" -U sa -P "$SA_PASSWORD" -d "master" -Q "set nocount on; select '- ' + name from sys.databases where name not in ('master', 'tempdb', 'model', 'msdb')" -h-1
+/opt/mssql-tools18/bin/sqlcmd -C -S "$DB_HOST" -U sa -P "$SA_PASSWORD" -d "master" -Q "set nocount on; select '- ' + name from sys.databases where name not in ('master', 'tempdb', 'model', 'msdb')" -h-1
 
 echo
 echo ' webserver starting'
