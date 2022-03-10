@@ -1,7 +1,7 @@
 version: "3.8"
 services:
   database_server:
-    image: mcr.microsoft.com/mssql/server
+    image: mcr.microsoft.com/mssql/server:2019-CU14-ubuntu-20.04
     # restart: always
     env_file:
       - variables.env

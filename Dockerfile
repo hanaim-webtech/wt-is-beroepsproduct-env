@@ -34,13 +34,7 @@ RUN cp /usr/local/etc/php/php.ini-development /usr/local/etc/php/php.ini
 RUN pecl config-set php_ini /usr/local/etc/php/php.ini
 
 # 4. install php drivers for pdo sqlsrv
-RUN pecl install sqlsrv
+# RUN pecl install sqlsrv
 RUN pecl install pdo_sqlsrv
 RUN docker-php-ext-enable pdo_sqlsrv
 
-
-
-# RUN pecl install xdebug
-# RUN docker-php-ext-enable xdebug
-
-# COPY "./webserver-setup/docker-php-ext-xdebug.ini" "/usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini"
