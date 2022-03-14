@@ -11,6 +11,7 @@ services:
         protocol: tcp
         mode: host
   web_server:
+    platform: "linux/amd64"
     build:
       dockerfile: Dockerfile-webserver
     restart: always
