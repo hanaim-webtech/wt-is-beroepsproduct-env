@@ -13,6 +13,9 @@ gebruik gemaakt van de [Built-in web
 server](https://www.php.net/manual/en/features.commandline.webserver.php),
 etc. etc.).***
 
+>❗Mocht je op een ARM machine zitten (zoals de nieuwe M1-chips van Apple)
+> dan moet je een aantal dingen wijzigen in de setup. Zie [ARM ondersteuning](#arm-ondersteuning)
+
 ## Benodigde software
 
 De volgende software heb je nodig:
@@ -191,3 +194,30 @@ het kopje
 [*Virtualization*](https://docs.docker.com/docker-for-windows/troubleshoot/#virtualization-must-be-enabled),
 alleen die onder de subkopjes *'VIRTUALIZATION MUST BE ENABLED'* en
 *'WSL 2 AND WINDOWS HOME'*.
+
+
+## ARM ondersteuning
+
+Op een machine die geen x86 architectuur heeft (zoals de M1-chips van Apple)
+moet je iets wijzigen in de file [docker-compose.yml](./docker-compose.yml).
+
+### Database server type aanpassen:
+
+Namelijk de `image` van de database_server:
+
+Waar nu staat:
+```yaml
+version: "3.8"
+services:
+  database_server:
+    image: mcr.microsoft.com/mssql/server
+    env_file:
+      - variables.env
+...
+```
+
+Vervang je de regel:
+
+`image: mcr.microsoft.com/mssql/server` naar -> `image: mcr.microsoft.com/azure-sql-edge`
+
+Probeer nu opnieuw `docker-compose up` vanuit je terminal te draaien.
