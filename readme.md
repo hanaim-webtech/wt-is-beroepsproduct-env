@@ -11,7 +11,7 @@ hiervoor zullen eerst nog een groot aantal beveilingsaspecten opgelost
 moeten worden (wachtwoorden zijn eenvoudig te achterhalen, er wordt
 gebruik gemaakt van de [Built-in web
 server](https://www.php.net/manual/en/features.commandline.webserver.php),
-etc. etc.).***
+er is altijd een debugger actief etc. etc.).***
 
 >❗Mocht je op een ARM machine zitten (zoals de nieuwe M1-chips van Apple)
 > dan moet je een aantal dingen wijzigen in de setup. Zie [ARM ondersteuning](#arm-ondersteuning)
@@ -195,7 +195,6 @@ het kopje
 alleen die onder de subkopjes *'VIRTUALIZATION MUST BE ENABLED'* en
 *'WSL 2 AND WINDOWS HOME'*.
 
-
 ## ARM ondersteuning
 
 Op een machine die geen x86 architectuur heeft (zoals de M1-chips van Apple)
@@ -221,3 +220,27 @@ Vervang je de regel:
 `image: mcr.microsoft.com/mssql/server` naar -> `image: mcr.microsoft.com/azure-sql-edge`
 
 Probeer nu opnieuw `docker-compose up` vanuit je terminal te draaien.
+
+## Debugging (foutopsporing) van je code
+
+Met een [debugger](https://en.wikipedia.org/wiki/Debugging) is het
+mogelijk om stapsgewijs door je code heen te lopen om zo fouten op te
+kunnen sporen. Het is een handig hulpmiddel om te bekijken wat de code
+nu precies doet. Deze omgeving is zo ingericht dat er ee n debugger
+actief is, je hebt alleen een extra extensie nodig. De [PHP
+Debug](https://marketplace.visualstudio.com/items?itemName=felixfbecker.php-debug)
+van Felix Becker dien je te installeren.
+
+### Installatie debugger
+
+Open aan de linkerkant van Visual Studio Code de extensions en zoek op *felixfbecker.php-debug*. Klik op install en wacht tot deze debugger is geïnstalleerd. Bij het opstarten 
+
+![Installatie PHP Debug](readme-images/vscode-extention-php-debug.png)
+
+### How to debug
+
+Hieronder twee filmpjes die aangeven hoe je een PHP-pagina kunt debuggen.
+
+![debugging part 1](readme-images/how-to-debug-part-1.gif)
+
+![debugging part 1](readme-images/how-to-debug-part-2.gif)
