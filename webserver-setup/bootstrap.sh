@@ -6,51 +6,60 @@
 
 sleep 10 # wait for sql server to start up
 
-for sqlfile in "$(dirname $0)"/*.sql
-do
-    dbname=$(basename "$sqlfile" .sql)
-    # 20 retries....
-    i=0
-    while [ $i -le 20 ]; do
-        echo ""
-        echo "---------------------------------------------"
-        echo "- $i: checking for database '$dbname'       -"
-        echo "---------------------------------------------"
+DIR=$(dirname $0)
 
-        # Check if Database already exists
-        RESULT=$(/opt/mssql-tools18/bin/sqlcmd -C -S "$DB_HOST" -U sa -P "$SA_PASSWORD" -Q "IF DB_ID('$dbname') IS NOT NULL print 'YES'")
-        CODE=$?
+if ls $DIR/*.sql &>/dev/null
+then
+    echo "SQL script files found."
 
-        if [ "$RESULT" = "YES" ]; then
+    for sqlfile in $DIR/*.sql
+    do
+        dbname=$(basename "$sqlfile" .sql)
+        # 20 retries....
+        i=0
+        while [ $i -le 20 ]; do
             echo ""
-            echo "-----------------------------------------------"
-            echo "- $i: Database '$dbname' exists               -"
-            echo "-----------------------------------------------"
-            # php -S 0.0.0.0:80 -t /applicatie/
-            break # exit for loop
+            echo "---------------------------------------------"
+            echo "- $i: checking for database '$dbname'       -"
+            echo "---------------------------------------------"
 
-        elif [ $CODE -eq 0 ] && [ "$RESULT" = "" ]; then
-            echo ""
-            echo "-------------------------------------------------------"
-            echo "- $i: Server available, creating database '$dbname'  -"
-            echo "-------------------------------------------------------"
-            /opt/mssql-tools18/bin/sqlcmd -C -S "$DB_HOST" -U sa -P "$SA_PASSWORD" -d "master" -Q "create database $dbname"
-            /opt/mssql-tools18/bin/sqlcmd -C -S "$DB_HOST" -U sa -P "$SA_PASSWORD" -d "$dbname" -i "$(dirname $0)"/"$dbname".sql
-            echo "-------------------------------------------------------"
-            echo "- $i: Database created '$dbname'                     -"
-            echo "-------------------------------------------------------"
-            # no break, let run the loop again, line 13 should return 'YES'
+            # Check if Database already exists
+            RESULT=$(/opt/mssql-tools18/bin/sqlcmd -C -S "$DB_HOST" -U sa -P "$SA_PASSWORD" -Q "IF DB_ID('$dbname') IS NOT NULL print 'YES'")
+            CODE=$?
 
-        # If the code is different than 0, an error occured. (most likely database wasn't online) Retry.
-        else
-            echo "-------------------------------------------------------"
-            echo "- $i: Database not ready yet...                       -"
-            echo "-------------------------------------------------------"
-            sleep 5
-        fi
-        i=$(( i + 1 ))
+            if [ "$RESULT" = "YES" ]; then
+                echo ""
+                echo "-----------------------------------------------"
+                echo "- $i: Database '$dbname' exists               -"
+                echo "-----------------------------------------------"
+                # php -S 0.0.0.0:80 -t /applicatie/
+                break # exit for loop
+
+            elif [ $CODE -eq 0 ] && [ "$RESULT" = "" ]; then
+                echo ""
+                echo "-------------------------------------------------------"
+                echo "- $i: Server available, creating database '$dbname'  -"
+                echo "-------------------------------------------------------"
+                /opt/mssql-tools18/bin/sqlcmd -C -S "$DB_HOST" -U sa -P "$SA_PASSWORD" -d "master" -Q "create database $dbname"
+                /opt/mssql-tools18/bin/sqlcmd -C -S "$DB_HOST" -U sa -P "$SA_PASSWORD" -d "$dbname" -i "$DIR/$dbname".sql
+                echo "-------------------------------------------------------"
+                echo "- $i: Database created '$dbname'                     -"
+                echo "-------------------------------------------------------"
+                # no break, let run the loop again, line 13 should return 'YES'
+
+            # If the code is different than 0, an error occured. (most likely database wasn't online) Retry.
+            else
+                echo "-------------------------------------------------------"
+                echo "- $i: Database not ready yet...                       -"
+                echo "-------------------------------------------------------"
+                sleep 5
+            fi
+            i=$(( i + 1 ))
+        done
     done
-done
+else
+    echo "No SQL script files found in folder '$DIR'"
+fi
 
 echo ''
 echo '-------------------------------------------------------'
