@@ -14,6 +14,6 @@
     Alle technische informatie over je webserver vind je hier: <a href="phpinfo.php">http://<?=$_SERVER['HTTP_HOST']?>/phpinfo.php</a>
     <br>
     <br>
-    Een voorbeeld van een pagina die gegevens uit de database haalt vind je hier: <a href="moviegenres.php">http://<?=$_SERVER['HTTP_HOST']?>/moviegenres.php</a>
+    Een voorbeeld van een pagina die gegevens uit de database haalt vind je hier: <a href="componist-aantalstukken.php">http://<?=$_SERVER['HTTP_HOST']?>/componist-aantalstukken.php</a>
 </body>
 </html>
