@@ -2,7 +2,7 @@
 
 Deze omgeving maakt een database server en een web server aan gebaseerd
 op [Docker](https://www.docker.com/). Bij het opstarten van de omgeving
-wordt automatisch de database *Fletnix* aangemaakt en gevuld met
+wordt automatisch een aantal databases aangemaakt en gevuld met
 voorbeelddata.
 
 ***Let op, deze omgeving is specifiek bedoeld als educatieve omgeving.
@@ -58,7 +58,7 @@ niet het geval is, kies in het menu van Visual Studio Code onder
 Type in de terminal `docker compose up` en daarna *enter*.
 
 Nu worden een database server en een web server aangemaakt. Daarna
-worden beide servers opgestart en de *Fletnix* database wordt
+worden beide servers opgestart en de databases worden
 automatisch aangemaakt en gevuld. Tijdens dit proces zie je een
 behoorlijk aantal meldingen voorbij komen.
 
@@ -73,6 +73,7 @@ Uiteindelijk moet de volgende melding in beeld verschijnen
     -------------------------------------------------------
      Available databases:                                 -
     - movies
+    - GelreAirport
     - muziekschool
 
      webserver starting
@@ -88,7 +89,7 @@ Test de webserver:
 -   *It works!*: <http://localhost:8080> of
     <http://localhost:8080/index.php>
 -   *phpinfo*: <http://localhost:8080/phpinfo.php>
--   *Data uit de database*: <http://localhost:8080/moviegenres.php>
+-   *Data uit de database*: <http://localhost:8080/componist-aantalstukken.php>
 
 ## Je eigen bestanden
 
@@ -110,7 +111,7 @@ echo ('Hallo **je eigen naam**');
 Roep de `test.php` in je webbrowser (op de localhost:8080). Als het goed
 is zie je de melding *Hallo, \*\*je eigen naam\*\** verschijnen.
 
-### Fletnix applicatie
+### Beroepsproduct applicatie
 
 Kopieer al je HTML-bestanden naar de map `./applicatie/` en verander van
 elke bestand de extensie naar `.php`. Roep als test alle bestanden aan
@@ -118,7 +119,7 @@ via je browser. Maak nu je web-applicatie zodanig dat deze optimaal van
 opzet is en dat de gegevens in de site uit de database gehaald worden.
 Zie de lesstof hoe je dat allemaal doet.
 
-Tip: in het bestand `moviegenres.php` (in combinatie met
+Tip: in het bestand [`componist-aantalstukken.php`](./applicatie/componist-aantalstukken.php) (in combinatie met
 `db_connectie.php`) kun je een voorbeeld zien hoe je verbinding maakt
 met een database en gegevens in een webpagina plaatst.
 
