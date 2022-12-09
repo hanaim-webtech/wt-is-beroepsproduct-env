@@ -8,6 +8,7 @@ WORKDIR /tmp/
 RUN apk update
 RUN apk add --no-cache php8 php8-dev php8-pear php8-pdo php8-openssl 
 RUN apk add --no-cache autoconf make g++ gnupg unixodbc-dev
+RUN apk add --no-cache linux-headers
 
 # 2. Install SQL Server ODBC drivers and tools (required for the sqlsrv driver).
 #    https://docs.microsoft.com/en-us/sql/connect/php/installation-tutorial-linux-mac?view=sql-server-ver15
