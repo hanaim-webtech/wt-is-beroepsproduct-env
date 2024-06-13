@@ -27,6 +27,7 @@ CREATE TABLE [User] (
   [password] NVARCHAR(255) NOT NULL,
   [first_name] NVARCHAR(255) NOT NULL,
   [last_name] NVARCHAR(255) NOT NULL,
+  [address] NVARCHAR(255),
   [role] NVARCHAR(50) NOT NULL
 );
 
@@ -54,14 +55,15 @@ CREATE TABLE [Item_Ingredient] (
   PRIMARY KEY ([item_name], [ingredient_name])
 );
 
--- Create Pizza_Order table
 CREATE TABLE [Pizza_Order] (
   [order_id] INT PRIMARY KEY IDENTITY(1, 1),
-  [client_username] NVARCHAR(255) NOT NULL,
+  [client_username] NVARCHAR(255),
+  [client_name] NVARCHAR(255) NOT NULL,
   [personnel_username] NVARCHAR(255) NOT NULL,
   [datetime] DATETIME NOT NULL,
+  [status] INT,
   [address] NVARCHAR(255)
-);
+)
 
 -- Create Pizza_Order_Item table
 CREATE TABLE [Pizza_Order_Item] (
@@ -179,35 +181,34 @@ INSERT INTO Item_Ingredient (item_name, ingredient_name) VALUES
 ('Combinatiemaaltijd', 'Spek'), -- Combinatiemaaltijd met Spek
 ('Combinatiemaaltijd', 'Saus'); -- Combinatiemaaltijd met Saus
 
--- Insert statements for Pizza_Order (dummy data with addresses in Arnhem and Nijmegen)
-INSERT INTO Pizza_Order (client_username, personnel_username, datetime, address) VALUES
-('jdoe', 'rdeboer', '2024-06-13 12:30:00', 'Koningstraat 1, Arnhem'),
-('mvermeer', 'sbakker', '2024-06-13 13:15:00', 'Grote Markt 2, Nijmegen'),
-('fholwerda', 'lheineken', '2024-06-13 18:00:00', 'Rijnkade 3, Arnhem'),
-('kdijkstra', 'mvandam', '2024-06-14 11:45:00', 'Plein 4, Nijmegen'),
-('gkoolstra', 'tjanssen', '2024-06-14 13:30:00', 'Stationsplein 5, Arnhem'),
-('evisscher', 'abrouwer', '2024-06-15 17:30:00', 'Hertogstraat 6, Nijmegen'),
-('wbos', 'rkramer', '2024-06-15 18:45:00', 'Koningstraat 7, Arnhem'),
-('tvandermeer', 'mnijland', '2024-06-16 12:00:00', 'Grote Markt 8, Nijmegen'),
-('dschouten', 'pvanveen', '2024-06-16 14:15:00', 'Rijnkade 9, Arnhem'),
-('hdeleeuw', 'lsaleh', '2024-06-17 19:00:00', 'Plein 10, Nijmegen'),
-('adekhane', 'tbayrak', '2024-06-17 20:30:00', 'Stationsplein 11, Arnhem'),
-('mbouaziz', 'ayildiz', '2024-06-18 13:00:00', 'Hertogstraat 12, Nijmegen'),
-('tbayrak', 'rnarsingh', '2024-06-18 14:45:00', 'Koningstraat 13, Arnhem'),
-('ayildiz', 'sdurga', '2024-06-19 16:30:00', 'Grote Markt 14, Nijmegen'),
-('rnarsingh', 'mkassem', '2024-06-19 18:15:00', 'Rijnkade 15, Arnhem'),
-('sdurga', 'aghebre', '2024-06-20 12:00:00', 'Plein 16, Nijmegen'),
-('mkassem', 'mtsega', '2024-06-20 13:45:00', 'Stationsplein 17, Arnhem'),
-('aghebre', 'pkowalski', '2024-06-21 17:30:00', 'Hertogstraat 18, Nijmegen'),
-('mtsega', 'aivanov', '2024-06-21 19:15:00', 'Koningstraat 19, Arnhem'),
-('pkowalski', 'mkarimi', '2024-06-22 12:30:00', 'Grote Markt 20, Nijmegen'),
-('aivanov', 'hradman', '2024-06-22 14:00:00', 'Rijnkade 21, Arnhem'),
-('mkarimi', 'lbaloyi', '2024-06-23 18:00:00', 'Plein 22, Nijmegen'),
-('hradman', 'dpetrov', '2024-06-23 19:45:00', 'Stationsplein 23, Arnhem'),
-('lbaloyi', 'ibrahimovic', '2024-06-24 13:15:00', 'Hertogstraat 24, Nijmegen'),
-('dpetrov', 'snovak', '2024-06-24 15:00:00', 'Koningstraat 25, Arnhem'),
-('ibrahimovic', 'yabebe', '2024-06-25 17:45:00', 'Grote Markt 26, Nijmegen'),
-('snovak', 'ngebre', '2024-06-25 19:30:00', 'Rijnkade 27, Arnhem');
+-- Insert statements for pizza orders
+INSERT INTO [Pizza_Order] (client_username, client_name, personnel_username, datetime, status, address) VALUES
+('jdoe', 'John Doe', 'rdeboer', '2024-06-12 18:45:00', 1, 'Bakkerstraat 1, 6811EG, Arnhem'),
+('mvermeer', 'Maria Vermeer', 'sbakker', '2024-06-12 19:00:00', 2, 'Jansplein 2, 6811GD, Arnhem'),
+('fholwerda', 'Fenna Holwerda', 'lheineken', '2024-06-12 19:15:00', 1, 'Willemsplein 3, 6811KD, Arnhem'),
+('kdijkstra', 'Klaas Dijkstra', 'mvandam', '2024-06-12 19:30:00', 2, 'Kerkstraat 4, 6811DW, Arnhem'),
+('gkoolstra', 'Gert Koolstra', 'tjanssen', '2024-06-12 19:45:00', 3, 'Rijnkade 5, 6811HA, Arnhem'),
+(NULL, 'Pieter Post', 'abrouwer', '2024-06-12 20:00:00', 1, 'Grote Markt 6, 6511KB, Nijmegen'),
+(NULL, 'Anna Smits', 'wbos', '2024-06-12 20:15:00', 2, 'Sint Annastraat 7, 6524EZ, Nijmegen'),
+(NULL, 'Bert van Dijk', 'tvandermeer', '2024-06-12 20:30:00', 3, 'Oranjesingel 8, 6511NV, Nijmegen'),
+(NULL, 'Sara de Vries', 'rkramer', '2024-06-12 20:45:00', 1, 'Van Welderenstraat 9, 6511MS, Nijmegen'),
+(NULL, 'Jan Jansen', 'mnijland', '2024-06-12 21:00:00', 2, 'Molenstraat 10, 6511HJ, Nijmegen'),
+('dschouten', 'David Schouten', 'hdeleeuw', '2024-06-13 18:45:00', 1, 'Velperweg 11, 6814AD, Arnhem'),
+('evisscher', 'Emma Visscher', 'pvanveen', '2024-06-13 19:00:00', 2, 'Geitenkamp 12, 6815AP, Arnhem'),
+('adekhane', 'Ahmed Dekhane', 'ayildiz', '2024-06-13 19:15:00', 1, 'IJssellaan 13, 6821DJ, Arnhem'),
+('wbos', 'Willem Bos', 'tbayrak', '2024-06-13 19:30:00', 2, 'Broekstraat 14, 6822GD, Arnhem'),
+('mnijland', 'Maud Nijland', 'mkassem', '2024-06-13 19:45:00', 3, 'Apeldoornsestraat 15, 6828AJ, Arnhem'),
+(NULL, 'Els de Boer', 'lsaleh', '2024-06-13 20:00:00', 1, 'Marialaan 16, 6541RP, Nijmegen'),
+(NULL, 'Tom Bakker', 'pkowalski', '2024-06-13 20:15:00', 2, 'Smetiusstraat 17, 6511EP, Nijmegen'),
+(NULL, 'Mila Janssen', 'aivanov', '2024-06-13 20:30:00', 3, 'Van Oldenbarneveltstraat 18, 6511PA, Nijmegen'),
+(NULL, 'Lars de Groot', 'mkarimi', '2024-06-13 20:45:00', 1, 'Hertogstraat 19, 6511RV, Nijmegen'),
+(NULL, 'Rik Kramer', 'dpetrov', '2024-06-13 21:00:00', 2, 'Van Schaeck Mathonsingel 20, 6512AP, Nijmegen'),
+(NULL, 'Sophie van der Meer', 'ibrahimovic', '2024-06-14 18:45:00', 1, 'Lange Hezelstraat 21, 6511CM, Nijmegen'),
+('rdeboer', 'Rik de Boer', 'sbakker', '2024-06-14 19:00:00', 2, 'Waalkade 22, 6511XR, Nijmegen'),
+('mvermeer', 'Maria Vermeer', 'lheineken', '2024-06-14 19:15:00', 1, 'Sint Jacobslaan 23, 6533BT, Nijmegen'),
+('jdoe', 'John Doe', 'mvandam', '2024-06-14 19:30:00', 2, 'Van Broeckhuysenstraat 24, 6511PE, Nijmegen'),
+(NULL, 'Henk de Wit', 'gkoolstra', '2024-06-14 19:45:00', 3, 'Ziekerstraat 25, 6511LH, Nijmegen');
+
 
 -- Insert statements for Pizza_Order_Item (dummy data for orders)
 INSERT INTO Pizza_Order_Item (order_id, item_name, quantity) VALUES
@@ -249,8 +250,27 @@ INSERT INTO Pizza_Order_Item (order_id, item_name, quantity) VALUES
 (23, 'Pepperoni Pizza', 1),
 (24, 'Vegetarische Pizza', 2),
 (25, 'Hawaiian Pizza', 2),
-(25, 'Sprite', 1),
-(26, 'Combinatiemaaltijd', 1),
-(26, 'Knoflookbrood', 1),
-(27, 'Pepperoni Pizza', 2),
-(27, 'Coca Cola', 2);
+(25, 'Sprite', 1);
+
+
+-- pak de oudste en de nieuwste datum
+declare @date_start datetime;
+declare @date_end datetime;
+
+select @date_start = MIN(datetime) from Pizza_Order;
+select @date_end   = max(datetime) from Pizza_Order;
+
+-- Bereken aan de hand van het verschil de middelste datum tussen start en eind
+declare @diff int;
+set @diff = DATEDIFF(minute, @date_start, @date_end);
+
+declare @middle_date datetime;
+set @middle_date = DATEADD(minute, @diff/2, @date_start);
+
+-- Bereken verschil middelste datum met nu (huidig tijdstip)
+set @diff = DATEDIFF(minute, @middle_date, GETDATE());
+
+-- update vlucht vertrektijden en passagier inchecktijd
+update Pizza_Order set [datetime] = DATEADD(minute, @diff, datetime);
+
+go
