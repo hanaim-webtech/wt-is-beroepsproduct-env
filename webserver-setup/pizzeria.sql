@@ -2,20 +2,20 @@
 IF OBJECT_ID('User', 'U') IS NOT NULL
     DROP TABLE [User];
 
-IF OBJECT_ID('ItemType', 'U') IS NOT NULL
-    DROP TABLE ItemType;
+IF OBJECT_ID('ProductType', 'U') IS NOT NULL
+    DROP TABLE ProductType;
 
 IF OBJECT_ID('Ingredient', 'U') IS NOT NULL
     DROP TABLE Ingredient;
 
-IF OBJECT_ID('Item', 'U') IS NOT NULL
-    DROP TABLE Item;
+IF OBJECT_ID('Product', 'U') IS NOT NULL
+    DROP TABLE Product;
 
-IF OBJECT_ID('Item_Ingredient', 'U') IS NOT NULL
-    DROP TABLE Item_Ingredient;
+IF OBJECT_ID('Product_Ingredient', 'U') IS NOT NULL
+    DROP TABLE Product_Ingredient;
 
-IF OBJECT_ID('Pizza_Order_Item', 'U') IS NOT NULL
-    DROP TABLE Pizza_Order_Item;
+IF OBJECT_ID('Pizza_Order_Product', 'U') IS NOT NULL
+    DROP TABLE Pizza_Order_Product;
 
 IF OBJECT_ID('Pizza_Order', 'U') IS NOT NULL
     DROP TABLE Pizza_Order;
@@ -31,8 +31,8 @@ CREATE TABLE [User] (
   [role] NVARCHAR(50) NOT NULL
 );
 
--- Create ItemType table
-CREATE TABLE [ItemType] (
+-- Create ProductType table
+CREATE TABLE [ProductType] (
   [name] NVARCHAR(255) PRIMARY KEY
 );
 
@@ -41,18 +41,18 @@ CREATE TABLE [Ingredient] (
   [name] NVARCHAR(255) PRIMARY KEY
 );
 
--- Create Item table
-CREATE TABLE [Item] (
+-- Create Product table
+CREATE TABLE [Product] (
   [name] NVARCHAR(255) PRIMARY KEY,
   [price] DECIMAL(10,2) NOT NULL,
   [type_id] NVARCHAR(255) NOT NULL
 );
 
--- Create Item_Ingredient table
-CREATE TABLE [Item_Ingredient] (
-  [item_name] NVARCHAR(255),
+-- Create Product_Ingredient table
+CREATE TABLE [Product_Ingredient] (
+  [product_name] NVARCHAR(255),
   [ingredient_name] NVARCHAR(255),
-  PRIMARY KEY ([item_name], [ingredient_name])
+  PRIMARY KEY ([product_name], [ingredient_name])
 );
 
 CREATE TABLE [Pizza_Order] (
@@ -65,22 +65,22 @@ CREATE TABLE [Pizza_Order] (
   [address] NVARCHAR(255)
 )
 
--- Create Pizza_Order_Item table
-CREATE TABLE [Pizza_Order_Item] (
+-- Create Pizza_Order_Product table
+CREATE TABLE [Pizza_Order_Product] (
   [order_id] INT,
-  [item_name] NVARCHAR(255),
+  [product_name] NVARCHAR(255),
   [quantity] INT NOT NULL,
-  PRIMARY KEY ([order_id], [item_name])
+  PRIMARY KEY ([order_id], [product_name])
 );
 
 -- -- Add foreign key constraints
-ALTER TABLE [Item] ADD FOREIGN KEY ([type_id]) REFERENCES [ItemType] ([name]);
-ALTER TABLE [Item_Ingredient] ADD FOREIGN KEY ([item_name]) REFERENCES [Item] ([name]);
-ALTER TABLE [Item_Ingredient] ADD FOREIGN KEY ([ingredient_name]) REFERENCES [Ingredient] ([name]);
+ALTER TABLE [Product] ADD FOREIGN KEY ([type_id]) REFERENCES [ProductType] ([name]);
+ALTER TABLE [Product_Ingredient] ADD FOREIGN KEY ([product_name]) REFERENCES [Product] ([name]);
+ALTER TABLE [Product_Ingredient] ADD FOREIGN KEY ([ingredient_name]) REFERENCES [Ingredient] ([name]);
 ALTER TABLE [Pizza_Order] ADD FOREIGN KEY ([client_username]) REFERENCES [User] ([username]);
 ALTER TABLE [Pizza_Order] ADD FOREIGN KEY ([personnel_username]) REFERENCES [User] ([username]);
-ALTER TABLE [Pizza_Order_Item] ADD FOREIGN KEY ([order_id]) REFERENCES [Pizza_Order] ([order_id]);
-ALTER TABLE [Pizza_Order_Item] ADD FOREIGN KEY ([item_name]) REFERENCES [Item] ([name]);
+ALTER TABLE [Pizza_Order_Product] ADD FOREIGN KEY ([order_id]) REFERENCES [Pizza_Order] ([order_id]);
+ALTER TABLE [Pizza_Order_Product] ADD FOREIGN KEY ([product_name]) REFERENCES [Product] ([name]);
 
 -- -- Insert statements for 20 users with realistic names
 INSERT INTO [User] (username, [password], first_name, last_name, [role]) VALUES
@@ -124,8 +124,8 @@ INSERT INTO [User] (username, [password], first_name, last_name, [role]) VALUES
 ('yabebe', 'wachtwoord', 'Yonas', 'Abebe', 'Personnel'), 
 ('ngebre', 'wachtwoord', 'Nardos', 'Gebre', 'Personnel'); 
 
--- Insert statements for item types
-INSERT INTO ItemType ([name]) VALUES
+-- Insert statements for product types
+INSERT INTO ProductType ([name]) VALUES
 ('Pizza'),
 ('Maaltijd'),
 ('Specerij'),
@@ -143,8 +143,8 @@ INSERT INTO Ingredient ([name]) VALUES
 ('Spek'),
 ('Saus');
 
--- Insert statements for items
-INSERT INTO Item ([name], price, type_id) VALUES
+-- Insert statements for products
+INSERT INTO Product ([name], price, type_id) VALUES
 ('Margherita Pizza', 9.99, 'Pizza'),
 ('Pepperoni Pizza', 11.99, 'Pizza'),
 ('Vegetarische Pizza', 10.99, 'Pizza'),
@@ -154,8 +154,8 @@ INSERT INTO Item ([name], price, type_id) VALUES
 ('Coca Cola', 2.49, 'Drank'),
 ('Sprite', 2.49, 'Drank');
 
--- Insert statements for item-ingredient relationships
-INSERT INTO Item_Ingredient (item_name, ingredient_name) VALUES
+-- Insert statements for product-ingredient relationships
+INSERT INTO Product_Ingredient (product_name, ingredient_name) VALUES
 ('Margherita Pizza', 'Tomaat'), -- Margherita Pizza met Tomaat
 ('Margherita Pizza', 'Kaas'), -- Margherita Pizza met Kaas
 ('Pepperoni Pizza', 'Tomaat'), -- Pepperoni Pizza met Tomaat
@@ -210,8 +210,8 @@ INSERT INTO [Pizza_Order] (client_username, client_name, personnel_username, dat
 (NULL, 'Henk de Wit', 'gkoolstra', '2024-06-14 19:45:00', 3, 'Ziekerstraat 25, 6511LH, Nijmegen');
 
 
--- Insert statements for Pizza_Order_Item (dummy data for orders)
-INSERT INTO Pizza_Order_Item (order_id, item_name, quantity) VALUES
+-- Insert statements for Pizza_Order_Product (dummy data for orders)
+INSERT INTO Pizza_Order_Product (order_id, product_name, quantity) VALUES
 (1, 'Margherita Pizza', 2),
 (1, 'Coca Cola', 3),
 (2, 'Pepperoni Pizza', 1),
