@@ -198,29 +198,14 @@ alleen die onder de subkopjes *'VIRTUALIZATION MUST BE ENABLED'* en
 
 ## ARM ondersteuning
 
-Op een machine die geen x86 architectuur heeft (zoals de M1-chips van Apple)
-moet je iets wijzigen in de file [docker-compose.yml](./docker-compose.yml).
+Op een machine die geen x86 architectuur heeft (zoals de M*-chips van Apple of een Apple Macbook Neo)
+moet je ervoor zorgen dat Docker goed ingesteld staat. Daarin moet namelijk de Virtualizatie via Rosetta2 aanstaan.
 
-### Database server type aanpassen:
-
-Namelijk de `image` van de database_server:
-
-Waar nu staat:
-```yaml
-version: "3.8"
-services:
-  database_server:
-    image: mcr.microsoft.com/mssql/server
-    env_file:
-      - variables.env
-...
-```
-
-Vervang je de regel:
-
-`image: mcr.microsoft.com/mssql/server` naar -> `image: mcr.microsoft.com/azure-sql-edge`
+[!Docker settings screen](./readme-images/Docker-settings-macos.png)
 
 Probeer nu opnieuw `docker-compose up` vanuit je terminal te draaien.
+
+Meer informatie is beschikbaar in het nieuwsbericht van Microsoft: [Development with SQL in containers on macOS](https://devblogs.microsoft.com/azure-sql/development-with-sql-in-containers-on-macos/)
 
 ## Debugging (foutopsporing) van je code
 
