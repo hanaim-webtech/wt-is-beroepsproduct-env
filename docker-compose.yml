@@ -1,7 +1,7 @@
-version: "3.8"
 services:
   database_server:
-    image: mcr.microsoft.com/mssql/server
+    platform: "linux/amd64"
+    image: mcr.microsoft.com/mssql/server:2022-latest
     env_file:
       - variables.env
     ports:
@@ -13,8 +13,7 @@ services:
       - data-volume:/var/opt/mssql
   web_server:
     platform: "linux/amd64"
-    build:
-      dockerfile: Dockerfile-webserver
+    image: namoshek/php-mssql:8.4-cli-alpine
     env_file:
       - variables.env
     depends_on:
